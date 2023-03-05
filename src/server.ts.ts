@@ -5,8 +5,8 @@ import express from "express";
 import morgan from "morgan";
 import productRouter from "./routes/product";
 import { protect } from "./modules/auth";
-import updatePoint from "./routes/updatepoint";
 import updatePointRouter from "./routes/updatepoint";
+import updateRouter from "./routes/update";
 
 // import router from "./router";
 
@@ -22,9 +22,9 @@ app.use(express.urlencoded({ extended: true }));
  * app.[method]([route], [route handler])
  */
 
-app.use("/api/update", protect, updatePointRouter);
+app.use("/api/update", protect, updateRouter);
 app.use("/api/product", protect, productRouter);
-app.use("/api/updatepoint", protect, updatePoint);
+app.use("/api/updatepoint", protect, updatePointRouter);
 
 app.post("/user", createNewUser);
 app.post("/signin", signin);

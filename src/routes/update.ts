@@ -6,7 +6,9 @@ const updateRouter = Router();
  * Update
  */
 
-updateRouter.get("/", (req, res) => {});
+updateRouter.get("/", (req, res) => {
+  res.json({ message: "Update route" });
+});
 
 updateRouter.get("/:id", (req, res) => {});
 

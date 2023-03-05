@@ -6,7 +6,7 @@ const updatePointRouter = Router();
  * UpdatePoint
  */
 
-updatePointRouter.get("/updatepoint", (req, res) => {
+updatePointRouter.get("/", (req, res) => {
   res.json({ message: "update-point" });
 });
 
