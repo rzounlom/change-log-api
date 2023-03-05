@@ -1,4 +1,8 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
+import { body, oneOf } from "express-validator";
+
+import { Handler } from "express";
+import { handleInputErrors } from "../modules/middleware";
 
 const updateRouter = Router();
 
@@ -6,16 +10,30 @@ const updateRouter = Router();
  * Update
  */
 
-updateRouter.get("/", (req, res) => {
+updateRouter.get("/", (req: Request, res: Response) => {
   res.json({ message: "Update route" });
 });
 
-updateRouter.get("/:id", (req, res) => {});
+updateRouter.get("/:id", (req: Request, res: Response) => {});
 
-updateRouter.post("/", (req, res) => {});
+updateRouter.post(
+  "/",
+  [body("title").exists().isString(), body("body").exists().isString()],
+  (req: Request, res: Response) => {}
+);
 
-updateRouter.put("/:id", (req, res) => {});
+updateRouter.put(
+  "/:id",
+  [
+    body("title").optional(),
+    body("body").optional(),
+    body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]),
+    body("version").optional(),
+  ],
+  handleInputErrors,
+  (req: Request, res: Response) => {}
+);
 
-updateRouter.delete("/:id", (req, res) => {});
+updateRouter.delete("/:id", (req: Request, res: Response) => {});
 
 export default updateRouter;
