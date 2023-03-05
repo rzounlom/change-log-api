@@ -6,7 +6,7 @@ const productRouter = Router();
  * Product
  */
 productRouter.get("/", (req, res) => {
-  res.json({ message: "product" });
+  res.json({ message: "product api" });
 });
 
 productRouter.get("/:id", (req, res) => {});
