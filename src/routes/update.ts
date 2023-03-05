@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
-import { body, oneOf } from "express-validator";
 
 import { Handler } from "express";
+import { body } from "express-validator";
 import { handleInputErrors } from "../modules/middleware";
 
 const updateRouter = Router();

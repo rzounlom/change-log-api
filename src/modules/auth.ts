@@ -1,8 +1,7 @@
 import * as bcrypt from "bcrypt";
 
 import { NextFunction, Request, Response } from "express";
-
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 export const createJWT = (user: { id: string; username: string }) => {
   const token = jwt.sign(
