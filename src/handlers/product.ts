@@ -1,4 +1,4 @@
-import { Request, Response, Router } from "express";
+import { Request, Response } from "express";
 
 import prisma from "../db";
 
@@ -73,7 +73,7 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
   const deletedProduct = await prisma.product.delete({
     where: {
-      id_belongsToId: { id: req.body.user.id, belongsToId: req.body.user.id },
+      id_belongsToId: { id: req.params.id, belongsToId: req.body.user.id },
     },
   });
 

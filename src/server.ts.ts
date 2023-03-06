@@ -1,7 +1,7 @@
 import { createNewUser, signin } from "./handlers/user";
+import express, { NextFunction, Request, Response } from "express";
 
 import cors from "cors";
-import express from "express";
 import morgan from "morgan";
 import productRouter from "./routes/product";
 import { protect } from "./modules/auth";
@@ -21,7 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 /**
  * app.[method]([route], [route handler])
  */
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "Hello!" });
+});
 
+//api routes
 app.use("/api/update", protect, updateRouter);
 app.use("/api/product", protect, productRouter);
 app.use("/api/updatepoint", protect, updatePointRouter);
@@ -29,8 +33,10 @@ app.use("/api/updatepoint", protect, updatePointRouter);
 app.post("/user", createNewUser);
 app.post("/signin", signin);
 
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "Hello!" });
+//error handler
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  console.log(err);
+  res.json({ message: "oops there was an error" });
 });
 
 export default app;

@@ -1,6 +1,12 @@
-import { Request, Response, Router } from "express";
+import {
+  createUpdate,
+  deleteUpdate,
+  getOneUpdate,
+  getUpdates,
+  updateUpdate,
+} from "../handlers/update";
 
-import { Handler } from "express";
+import { Router } from "express";
 import { body } from "express-validator";
 import { handleInputErrors } from "../modules/middleware";
 
@@ -10,16 +16,18 @@ const updateRouter = Router();
  * Update
  */
 
-updateRouter.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Update route" });
-});
+updateRouter.get("/", getUpdates);
 
-updateRouter.get("/:id", (req: Request, res: Response) => {});
+updateRouter.get("/:id", getOneUpdate);
 
 updateRouter.post(
   "/",
-  [body("title").exists().isString(), body("body").exists().isString()],
-  (req: Request, res: Response) => {}
+  [
+    body("title").exists().isString(),
+    body("body").exists().isString(),
+    body("productId").exists().isString(),
+  ],
+  createUpdate
 );
 
 updateRouter.put(
@@ -27,13 +35,13 @@ updateRouter.put(
   [
     body("title").optional(),
     body("body").optional(),
-    body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]),
+    body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]).optional(),
     body("version").optional(),
   ],
   handleInputErrors,
-  (req: Request, res: Response) => {}
+  updateUpdate
 );
 
-updateRouter.delete("/:id", (req: Request, res: Response) => {});
+updateRouter.delete("/:id", deleteUpdate);
 
 export default updateRouter;
