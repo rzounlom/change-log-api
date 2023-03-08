@@ -3,11 +3,7 @@ import { comparePasswords, createJWT, hashPassword } from "../modules/auth";
 
 import prisma from "../db";
 
-export const createNewUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const createNewUser = async (req: any, res: any, next: NextFunction) => {
   try {
     const hash = await hashPassword(req.body.password);
 
