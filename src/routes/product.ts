@@ -35,4 +35,5 @@ productRouter.put(
 
 productRouter.delete("/:id", deleteProduct);
 
+//ADD error handler here
 export default productRouter;
